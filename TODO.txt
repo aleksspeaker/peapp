@@ -1,0 +1,2 @@
+Create global repo for backend and frontend
+Get commits from backend's repo to global repo

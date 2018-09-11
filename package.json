@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "koa-static": "^5.0.0"
+  },
+  "name": "peApp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "aleksspeaker <alekspeaker@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+      "start": "concurrently — kill-others \"npm run backend\" \"npm run frontend\"",
+      "backend": "cd backend && npm run dev",
+      "frontend": "cd frontend && npm start",
+      "build": "cd frontend && npm run build"
+    },
+    "devDependencies": {
+      "concurrently": "3.5.1"
+    }
+}
