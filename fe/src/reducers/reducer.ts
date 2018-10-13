@@ -10,7 +10,7 @@ export const initState = {
       text: 'Learn Typescript',
     },
     {
-      done: false,
+      done: true,
       id: 1,
       text: 'Learn React',
     },
@@ -22,7 +22,7 @@ export const initState = {
   ]
 }
 
-interface ITodo {
+export interface ITodo {
   done: boolean,
   id: number,
   text: string,
@@ -31,7 +31,7 @@ export interface IState {
   nextId: number,
   todos: ITodo[]
 }
-interface ITodoAction extends Action {
+export interface ITodoAction extends Action {
   payload?: string | number;
 }
 

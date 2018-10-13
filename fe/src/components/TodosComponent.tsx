@@ -1,17 +1,19 @@
 import * as React from "react";
 import { PureComponent } from "react";
+import { ITodo } from '../reducers/reducer';
+import SingleTodo from './SingleTodo';
 import { ITodosComponentProps } from './TodosComponent.interface';
 
 class TodosComponent extends PureComponent<ITodosComponentProps> {
-  public handleChange(ev: React.FormEvent) {
-    // this.
-  }
   public render() {
-    return this.props.todos.map((todo: any) =>
+    return this.props.todos.map((todo: ITodo) =>
       (
-        <div key={todo.id} className="content">
-          <input onChange={this.handleChange} className="input" type="checkbox" />
-          {todo.text}
+        <div key={todo.id} className="todo">
+          <SingleTodo
+            todo={todo}
+            toggleTodo={this.props.toggleTodo}
+            deleteTodo={this.props.deleteTodo}
+          />
         </div>
       )
     )
