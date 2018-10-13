@@ -1,13 +1,20 @@
 import * as React from "react";
+import { Fragment, PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { TODOS } from '../actions/actions';
+import TodoInput from '../components/TodoInput';
 import TodosComponent from '../components/TodosComponent';
-import { ITodosContainerProps } from './TodosContainer.interface';
+import { IPropsFromDispatch, IPropsFromState, ITodosContainerProps } from './TodosContainer.interface';
 
-class TodosContainer extends React.PureComponent<ITodosContainerProps> {
+class TodosContainer extends PureComponent<ITodosContainerProps> {
   public render() {
-    return <TodosComponent todos={this.props.todos}/>
+    return (
+      <Fragment>
+        <TodoInput addTodo={this.props.addTodo}/>
+        <TodosComponent todos={this.props.todos}/>
+      </Fragment>
+    )
   }
 }
 
@@ -16,10 +23,12 @@ const mapStateToProps = (state: ITodosContainerProps) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addTodo: dispatch({
-    payload: 'Learn Electricity',
+  addTodo: (todoText: string) => dispatch({
+    payload: todoText,
     type: TODOS.ADD_TODO,
   })
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodosContainer)
+export default
+  connect<IPropsFromState, IPropsFromDispatch>
+    (mapStateToProps, mapDispatchToProps)(TodosContainer)
