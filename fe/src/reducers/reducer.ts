@@ -1,5 +1,5 @@
-import { Action } from 'redux';
 import { TODOS } from '../actions/actions';
+import { ITodoAction } from './reducer.interface';
 
 export const initState = {
   nextId: 3,
@@ -31,12 +31,12 @@ export interface IState {
   nextId: number,
   todos: ITodo[]
 }
-export interface ITodoAction extends Action {
-  payload?: string | number;
-}
+
 
 export const reducer = (state: IState, action: ITodoAction) => {
   switch(action.type) {
+    case TODOS.FETCH_START:
+      return state
     case TODOS.ADD_TODO:
       const id = state.nextId
       return { 

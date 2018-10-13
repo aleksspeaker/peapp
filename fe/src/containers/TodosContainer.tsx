@@ -26,13 +26,11 @@ const mapStateToProps = (state: ITodosContainerProps) => ({
   todos: state.todos
 })
 
-
-
 const mapDispatchToProps = (dispatch: Dispatch) => 
 bindActionCreators({
   addTodo,
   deleteTodo,
-  toggleTodo
+  toggleTodo,
 }, dispatch)
 
 export default
