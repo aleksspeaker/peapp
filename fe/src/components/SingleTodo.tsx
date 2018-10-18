@@ -34,7 +34,7 @@ class SingleTodo extends PureComponent<IProps> {
             checked={this.props.todo.done}
             />
           <span className="task-number">1.</span>
-          <span className="task-text">{this.props.todo.text}</span>
+          <span className="task-text">{this.props.todo.description}</span>
         </div>
         <button
           className="rem-btn"

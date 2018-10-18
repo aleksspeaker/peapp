@@ -5,19 +5,19 @@ export const initState = {
   nextId: 3,
   todos: [
     {
+      description: 'Learn Typescript',
       done: false,
       id: 0,
-      text: 'Learn Typescript',
     },
     {
+      description: 'Learn React',
       done: true,
       id: 1,
-      text: 'Learn React',
     },
     {
+      description: 'Learn Redux',
       done: false,
       id: 2,
-      text: 'Learn Redux',
     }
   ]
 }
@@ -25,7 +25,7 @@ export const initState = {
 export interface ITodo {
   done: boolean,
   id: number,
-  text: string,
+  description: string,
 }
 export interface IState {
   nextId: number,
@@ -37,6 +37,8 @@ export const reducer = (state: IState, action: ITodoAction) => {
   switch(action.type) {
     case TODOS.FETCH_START:
       return state
+    case TODOS.FETCH_SUCCESS:
+      return {...state, todos: action.payload}
     case TODOS.ADD_TODO:
       const id = state.nextId
       return { 
@@ -45,9 +47,9 @@ export const reducer = (state: IState, action: ITodoAction) => {
         todos: [
           ...state.todos,
           {
+            description: action.payload,
             done: false,
             id,
-            text: action.payload,
           }
         ]
       }
