@@ -2,70 +2,37 @@ import { TODOS } from '../actions/actions';
 import { ITodoAction } from './reducer.interface';
 
 export const initState = {
-  nextId: 3,
-  todos: [
-    {
-      description: 'Learn Typescript',
-      done: false,
-      id: 0,
-    },
-    {
-      description: 'Learn React',
-      done: true,
-      id: 1,
-    },
-    {
-      description: 'Learn Redux',
-      done: false,
-      id: 2,
-    }
-  ]
+  todos: [{} as ITodo]
 }
 
 export interface ITodo {
   done: boolean,
-  id: number,
+  _id: string,
   description: string,
 }
 export interface IState {
-  nextId: number,
   todos: ITodo[]
 }
 
 
-export const reducer = (state: IState, action: ITodoAction) => {
+export const reducer = (state: IState = initState, action: ITodoAction) => {
   switch(action.type) {
     case TODOS.FETCH_START:
       return state
     case TODOS.FETCH_SUCCESS:
       return {...state, todos: action.payload}
-    case TODOS.ADD_TODO:
-      const id = state.nextId
-      return { 
-        ...state,
-        nextId: ++state.nextId,
-        todos: [
-          ...state.todos,
-          {
-            description: action.payload,
-            done: false,
-            id,
-          }
-        ]
-      }
+    case TODOS.FETCH_ERROR:
+      return state
+    case TODOS.ADD_TODO_START:
+      return state
     case TODOS.TOGGLE_TODO:
-      return {
-        ...state,
-        todos: [
-          ...state.todos.map(todo => 
-            todo.id === action.payload ? { ...todo, done: !todo.done} : todo),
-        ]
-      }
-    case TODOS.DELETE_TODO:
-      return {
-        ...state,
-        todos: [...state.todos.filter(todo => todo.id !== action.payload)]
-      }
+      return state
+    case TODOS.DELETE_TODO_START:
+      return state
+    case TODOS.DELETE_TODO_ERROR:
+      return state
+    case TODOS.DELETE_TODO_SUCCESS:
+      return state
     default:
       return state;
   }

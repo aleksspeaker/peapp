@@ -17,6 +17,7 @@ h1 {
   font-weight: 300;
   color: rgba(0, 0, 0, 0.64);
   animation: fadein 1s;
+  text-align: center;
 }
 
 @keyframes fadein {

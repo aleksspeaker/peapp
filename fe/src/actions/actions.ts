@@ -14,26 +14,24 @@ export enum TODOS {
 
   FETCH_START = 'FETCH_START',
   FETCH_SUCCESS = 'FETCH_SUCCESS',
-  FETCH_ERROR = 'FETCH_ERROR'
+  FETCH_ERROR = 'FETCH_ERROR',
+
+  DELETE_TODO_START = 'DELETE_TODO_START',
+  DELETE_TODO_SUCCESS = 'DELETE_TODO_SUCCESS',
+  DELETE_TODO_ERROR = 'DELETE_TODO_ERROR',
+
+  ADD_TODO_START = 'ADD_TODO_START',
+  ADD_TODO_SUCCESS = 'ADD_TODO_SUCCESS',
+  ADD_TODO_ERROR = 'ADD_TODO_ERROR',
 }
 
-export const addTodo = (todoText: string) => ({
-  payload: todoText,
-  type: TODOS.ADD_TODO,
-})
-
-export const deleteTodo = (todoId: number) => ({
-  payload: todoId,
-  type: TODOS.DELETE_TODO,
-})
-
-export const toggleTodo = (todoId: number) => ({
+export const toggleTodo = (todoId: string) => ({
   payload: todoId,
   type: TODOS.TOGGLE_TODO,
 })
 
 
-const actions = {
+const fetchActions = {
   fetchError: () => createAction(TODOS.FETCH_ERROR),
   fetchStart: () => createAction(TODOS.FETCH_START),
   fetchSuccess: (payload: []) => createAction(TODOS.FETCH_SUCCESS, payload),
@@ -42,22 +40,88 @@ const actions = {
 export const fetchTodos: ActionCreator<
   ThunkAction<void, [], void, AnyAction>
   > = () => (dispatch) => {
-    dispatch(actions.fetchStart());
+    dispatch(fetchActions.fetchStart());
 
     axios
       .get('v1/todos')
       .then((response: AxiosResponse) => {
-        // tslint:disable-next-line:no-console
-        // console.log('====================================');
-        // tslint:disable-next-line:no-console
-        // console.log(response.data);
-        // tslint:disable-next-line:no-console
-        // console.log('====================================');
-        dispatch(actions.fetchSuccess(response.data));
+        dispatch(fetchActions.fetchSuccess(response.data));
       })
       .catch((error: AxiosError) => {
         // tslint:disable-next-line:no-console
         console.warn(error, 'Unhandled error statement');
-        dispatch(actions.fetchError());
+        dispatch(fetchActions.fetchError());
+      });
+};
+
+
+const deleteActions = {
+  deleteTodoError: () => createAction(TODOS.DELETE_TODO_ERROR),
+  deleteTodoStart: (id: string) => createAction(TODOS.DELETE_TODO_START, id),
+  deleteTodoSuccess: (payload: []) => createAction(TODOS.DELETE_TODO_SUCCESS, payload),
+}
+
+export const deleteTodo: ActionCreator<
+  ThunkAction<void, [], void, AnyAction>
+  > = (id: string) => (dispatch) => {
+    // tslint:disable-next-line:no-console
+    console.log(id)
+    dispatch(deleteActions.deleteTodoStart(id));
+
+    axios
+      .delete(`v1/todos/${id}`)
+      .then((response: AxiosResponse) => {
+        // tslint:disable-next-line:no-console
+        console.log(response.data);
+        dispatch(deleteActions.deleteTodoSuccess(response.data));
+      })
+      .catch((error: AxiosError) => {
+        // tslint:disable-next-line:no-console
+        console.warn(error, 'Unhandled error statement');
+        dispatch(deleteActions.deleteTodoError());
       });
   };
+
+const addActions = {
+  addTodoError: () => createAction(TODOS.ADD_TODO_ERROR),
+  addTodoStart: () => createAction(TODOS.ADD_TODO_START),
+  addTodoSuccess: (payload: []) => createAction(TODOS.ADD_TODO_SUCCESS, payload),
+}
+
+export const addTodo: ActionCreator<
+  ThunkAction<void, [], void, AnyAction>
+  > = (todoText: string) => (dispatch) => {
+    const data = JSON.stringify({ description: todoText, done: false })
+    dispatch(addActions.addTodoStart());
+    axios
+      .post('v1/todos/', data, { headers: {'Content-Type': 'application/json' }})
+      .then((response: AxiosResponse) => {
+        // tslint:disable-next-line:no-console
+        console.log(response.data)
+        dispatch(addActions.addTodoSuccess(response.data));
+      })
+      .catch((error: AxiosError) => {
+        // tslint:disable-next-line:no-console
+        console.error(error, 'Unhandled error statement');
+        dispatch(addActions.addTodoError());
+      });
+  };
+
+
+// function* asd(action: any) {
+//   try {
+//     const options = {
+//       method: 'POST',
+//       body: JSON.stringify(action.todo),
+//       headers: new Headers({
+//         'Content-Type': 'application/json'
+//       })
+//     }
+
+//     const res = yield call(fetch, 'v1/todos', options)
+//     const todo = yield res.json()
+//     yield put(addTodoSuccess(todo))
+//   } catch (e) {
+//     yield put(todosFailure(e.message))
+//   }
+// }

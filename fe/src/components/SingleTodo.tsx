@@ -4,8 +4,8 @@ import { ITodo } from '../reducers/reducer';
 
 interface IProps {
   todo: ITodo;
-  toggleTodo: (id: number) => void;
-  deleteTodo: (id: number) => void;
+  toggleTodo: (id: string) => void;
+  deleteTodo: (id: string) => void;
 }
 
 class SingleTodo extends PureComponent<IProps> {
@@ -16,11 +16,11 @@ class SingleTodo extends PureComponent<IProps> {
   }
   
   public handleChange() {
-    this.props.toggleTodo(this.props.todo.id)
+    this.props.toggleTodo(this.props.todo._id)
   }
 
   public handleDeleteClick() {
-    this.props.deleteTodo(this.props.todo.id)
+    this.props.deleteTodo(this.props.todo._id)
   }
 
   public render() {
