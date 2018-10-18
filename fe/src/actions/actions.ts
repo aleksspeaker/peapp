@@ -104,22 +104,3 @@ export const addTodo: ActionCreator<
         dispatch(addActions.addTodoError());
       });
   };
-
-
-// function* asd(action: any) {
-//   try {
-//     const options = {
-//       method: 'POST',
-//       body: JSON.stringify(action.todo),
-//       headers: new Headers({
-//         'Content-Type': 'application/json'
-//       })
-//     }
-
-//     const res = yield call(fetch, 'v1/todos', options)
-//     const todo = yield res.json()
-//     yield put(addTodoSuccess(todo))
-//   } catch (e) {
-//     yield put(todosFailure(e.message))
-//   }
-// }
