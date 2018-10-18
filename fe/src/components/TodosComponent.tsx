@@ -8,17 +8,14 @@ class TodosComponent extends PureComponent<ITodosComponentProps> {
   public render() {
     return(
       <div className="todo-list">
-        {this.props.todos.map((todo: ITodo) => {
-          // tslint:disable-next-line:no-console
-          console.log(todo._id)
-          return(
+        {this.props.todos.map((todo: ITodo, index) => (
           <SingleTodo
-            key={todo._id}
+            key={`${todo._id}_${index}`}
             todo={todo}
             toggleTodo={this.props.toggleTodo}
             deleteTodo={this.props.deleteTodo}
           />
-        )})}
+        ))}
       </div>
     )
   }

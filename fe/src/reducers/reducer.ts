@@ -23,8 +23,18 @@ export const reducer = (state: IState = initState, action: ITodoAction) => {
       return {...state, todos: action.payload}
     case TODOS.FETCH_ERROR:
       return state
-    case TODOS.ADD_TODO_START:
-      return state
+    case TODOS.ADD_TODO_SUCCESS:
+      return {
+        ...state,
+        todos: [
+          ...state.todos,
+          {
+            _id: action.payload._id,
+            description: action.payload.description,
+            done: action.payload.done,
+          }
+        ]
+      }
     case TODOS.TOGGLE_TODO:
       return state
     case TODOS.DELETE_TODO_START:
@@ -32,7 +42,10 @@ export const reducer = (state: IState = initState, action: ITodoAction) => {
     case TODOS.DELETE_TODO_ERROR:
       return state
     case TODOS.DELETE_TODO_SUCCESS:
-      return state
+      return {
+        ...state,
+        todos: [...state.todos.filter(todo => todo._id !== action.payload._id)]
+      }
     default:
       return state;
   }

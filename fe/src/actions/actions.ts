@@ -2,6 +2,7 @@ import axios, { AxiosError } from 'axios';
 import { AxiosResponse } from 'axios';
 import { ActionCreator, AnyAction } from 'redux';
 import { ThunkAction } from 'redux-thunk';
+import { ITodo } from '../reducers/reducer';
 
 const createAction = (type: string, payload?: any) => {
   return payload === undefined ? { type } : { type, payload };
@@ -30,7 +31,6 @@ export const toggleTodo = (todoId: string) => ({
   type: TODOS.TOGGLE_TODO,
 })
 
-
 const fetchActions = {
   fetchError: () => createAction(TODOS.FETCH_ERROR),
   fetchStart: () => createAction(TODOS.FETCH_START),
@@ -58,7 +58,7 @@ export const fetchTodos: ActionCreator<
 const deleteActions = {
   deleteTodoError: () => createAction(TODOS.DELETE_TODO_ERROR),
   deleteTodoStart: (id: string) => createAction(TODOS.DELETE_TODO_START, id),
-  deleteTodoSuccess: (payload: []) => createAction(TODOS.DELETE_TODO_SUCCESS, payload),
+  deleteTodoSuccess: (payload: ITodo) => createAction(TODOS.DELETE_TODO_SUCCESS, payload),
 }
 
 export const deleteTodo: ActionCreator<
@@ -85,7 +85,7 @@ export const deleteTodo: ActionCreator<
 const addActions = {
   addTodoError: () => createAction(TODOS.ADD_TODO_ERROR),
   addTodoStart: () => createAction(TODOS.ADD_TODO_START),
-  addTodoSuccess: (payload: []) => createAction(TODOS.ADD_TODO_SUCCESS, payload),
+  addTodoSuccess: (payload: ITodo) => createAction(TODOS.ADD_TODO_SUCCESS, payload),
 }
 
 export const addTodo: ActionCreator<
@@ -96,8 +96,6 @@ export const addTodo: ActionCreator<
     axios
       .post('v1/todos/', data, { headers: {'Content-Type': 'application/json' }})
       .then((response: AxiosResponse) => {
-        // tslint:disable-next-line:no-console
-        console.log(response.data)
         dispatch(addActions.addTodoSuccess(response.data));
       })
       .catch((error: AxiosError) => {
