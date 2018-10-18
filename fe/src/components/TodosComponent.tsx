@@ -6,16 +6,17 @@ import { ITodosComponentProps } from './TodosComponent.interface';
 
 class TodosComponent extends PureComponent<ITodosComponentProps> {
   public render() {
-    return this.props.todos.map((todo: ITodo) =>
-      (
-        <div key={todo.id} className="todo">
+    return(
+      <div className="todo-list">
+        {this.props.todos.map((todo: ITodo) => (
           <SingleTodo
+            key={todo.id}
             todo={todo}
             toggleTodo={this.props.toggleTodo}
             deleteTodo={this.props.deleteTodo}
           />
-        </div>
-      )
+        ))}
+      </div>
     )
   }
 }

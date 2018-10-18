@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Fragment, PureComponent } from "react";
+import { PureComponent } from "react";
 import { ITodo } from '../reducers/reducer';
 
 interface IProps {
@@ -25,14 +25,22 @@ class SingleTodo extends PureComponent<IProps> {
 
   public render() {
     return(
-      <Fragment>
-        <input
-          onChange={this.handleChange}
-          checked={this.props.todo.done}
-          className="input" type="checkbox" />
-        { this.props.todo.text }
-        <button onClick={this.handleDeleteClick}>Del</button>
-      </Fragment>
+      <div className={`item ${this.props.todo.done && 'done'}`}>
+        <div className="task-body">
+          <input
+            className="checkbox input"
+            type="checkbox"
+            onChange={this.handleChange}
+            checked={this.props.todo.done}
+            />
+          <span className="task-number">1.</span>
+          <span className="task-text">{this.props.todo.text}</span>
+        </div>
+        <button
+          className="rem-btn"
+          onClick={this.handleDeleteClick}
+          >&#215;</button>
+      </div>
     )
   }
 }

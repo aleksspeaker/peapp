@@ -35,13 +35,15 @@ class TodoInput extends PureComponent<IProps, IState> {
     return (
       <Fragment>
         <input
+          className="input-field"
           onChange={this.handleChange}
           value={this.state.inputValue}
           type="text"
-          placeholder="todo text" />
+          placeholder="What needs to be done?"/>
+        <span className="hint">&#9166;</span>
         <button
           onClick={this.handleSubmit}
-          type="submit" >Add</button>
+          type="submit" >&#9166;</button>
       </Fragment>
     )
   }
