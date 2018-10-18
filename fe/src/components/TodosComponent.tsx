@@ -12,6 +12,7 @@ class TodosComponent extends PureComponent<ITodosComponentProps> {
           <SingleTodo
             key={`${todo._id}_${index}`}
             todo={todo}
+            todoIndex={index+1}
             toggleTodo={this.props.toggleTodo}
             deleteTodo={this.props.deleteTodo}
           />

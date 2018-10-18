@@ -4,6 +4,7 @@ import { ITodo } from '../reducers/reducer';
 
 interface IProps {
   todo: ITodo;
+  todoIndex: number;
   toggleTodo: (id: string) => void;
   deleteTodo: (id: string) => void;
 }
@@ -33,7 +34,7 @@ class SingleTodo extends PureComponent<IProps> {
             onChange={this.handleChange}
             checked={this.props.todo.done}
             />
-          <span className="task-number">1.</span>
+          <span className="task-number">{this.props.todoIndex}.</span>
           <span className="task-text">{this.props.todo.description}</span>
         </div>
         <button
