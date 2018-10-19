@@ -37,6 +37,14 @@ export const reducer = (state: IState = initState, action: ITodoAction) => {
       }
     case TODOS.TOGGLE_TODO:
       return state
+    case TODOS.TOGGLE_TODO_SUCCESS:
+      return {
+        ...state,
+        todos: [
+          ...state.todos.map(todo =>
+            todo._id === action.payload._id ? { ...todo, done: !todo.done } : todo),
+        ]
+      }
     case TODOS.DELETE_TODO_START:
       return state
     case TODOS.DELETE_TODO_ERROR:

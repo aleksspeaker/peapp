@@ -24,12 +24,11 @@ export enum TODOS {
   ADD_TODO_START = 'ADD_TODO_START',
   ADD_TODO_SUCCESS = 'ADD_TODO_SUCCESS',
   ADD_TODO_ERROR = 'ADD_TODO_ERROR',
-}
 
-export const toggleTodo = (todoId: string) => ({
-  payload: todoId,
-  type: TODOS.TOGGLE_TODO,
-})
+  TOGGLE_TODO_START = 'TOGGLE_TODO_START',
+  TOGGLE_TODO_SUCCESS = 'TOGGLE_TODO_SUCCESS',
+  TOGGLE_TODO_ERROR = 'TOGGLE_TODO_ERROR',
+}
 
 const fetchActions = {
   fetchError: () => createAction(TODOS.FETCH_ERROR),
@@ -64,15 +63,11 @@ const deleteActions = {
 export const deleteTodo: ActionCreator<
   ThunkAction<void, [], void, AnyAction>
   > = (id: string) => (dispatch) => {
-    // tslint:disable-next-line:no-console
-    console.log(id)
     dispatch(deleteActions.deleteTodoStart(id));
 
     axios
       .delete(`v1/todos/${id}`)
       .then((response: AxiosResponse) => {
-        // tslint:disable-next-line:no-console
-        console.log(response.data);
         dispatch(deleteActions.deleteTodoSuccess(response.data));
       })
       .catch((error: AxiosError) => {
@@ -102,5 +97,28 @@ export const addTodo: ActionCreator<
         // tslint:disable-next-line:no-console
         console.error(error, 'Unhandled error statement');
         dispatch(addActions.addTodoError());
+      });
+  };
+
+const toggleActions = {
+  toggleTodoError: () => createAction(TODOS.TOGGLE_TODO_ERROR),
+  toggleTodoStart: (id: string) => createAction(TODOS.TOGGLE_TODO_START, id),
+  toggleTodoSuccess: (payload: ITodo) => createAction(TODOS.TOGGLE_TODO_SUCCESS, payload),
+}
+
+export const toggleTodo: ActionCreator<
+  ThunkAction<void, [], void, AnyAction>
+  > = (id: string) => (dispatch) => {
+    dispatch(toggleActions.toggleTodoStart(id));
+
+    axios
+      .post(`v1/todos/${id}`)
+      .then((response: AxiosResponse) => {
+        dispatch(toggleActions.toggleTodoSuccess(response.data));
+      })
+      .catch((error: AxiosError) => {
+        // tslint:disable-next-line:no-console
+        console.warn(error, 'Unhandled error statement');
+        dispatch(toggleActions.toggleTodoError());
       });
   };
