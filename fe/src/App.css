@@ -13,8 +13,8 @@ body {
 }
 
 h1 {
-  font-size: 3rem;
-  font-weight: 300;
+  font-size: 2rem;
+  font-weight: 100;
   color: rgba(0, 0, 0, 0.64);
   animation: fadein 1s;
   text-align: center;

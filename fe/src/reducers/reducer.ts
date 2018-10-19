@@ -2,7 +2,7 @@ import { TODOS } from '../actions/actions';
 import { ITodoAction } from './reducer.interface';
 
 export const initState = {
-  todos: [{} as ITodo]
+  todos: []
 }
 
 export interface ITodo {
