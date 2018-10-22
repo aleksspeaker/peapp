@@ -46,35 +46,34 @@ describe('Reducer', () => {
     const payload = { _id: '2', description: "Learn TS", done: false };
     expect(reducer(state, { type: TODOS.ADD_TODO_SUCCESS, payload})).toEqual(nextState)
   })
-//   it('shoud return state with specified todo id, done: true if action is TOGGLE_TODO', () => {
-//     const nextState = {
-//       nextId: 2,
-//       todos: [
-//         {
-//           descrition: 'Learn Redux',
-//           done: true,
-//           id: 0,
-//         },
-//         {
-//           descrition: 'Learn React',
-//           done: false,
-//           id: 1,
-//         }
-//       ]
-//     }
-//     expect(reducer(state, { type: TODOS.TOGGLE_TODO, payload: 0 })).toEqual(nextState)
-//   })
-//   it('shoud return state without specified todo id, if action is DELETE_TODO', () => {
-//     const nextState = {
-//       nextId: 2,
-//       todos: [
-//         {
-//           decription: 'Learn React',
-//           done: false,
-//           id: 1,
-//         }
-//       ]
-//     }
-//     expect(reducer(state, { type: TODOS.DELETE_TODO, payload: 0 })).toEqual(nextState)
-//   })
-// })
+  it('shoud return state with specified todo id, done: true if action is TOGGLE_TODO', () => {
+    const nextState = {
+      todos: [
+        {
+          _id: '0',
+          description: 'Learn Redux',
+          done: true,
+        },
+        {
+          _id: '1',
+          description: 'Learn React',
+          done: false,
+        }
+      ]
+    }
+    expect(reducer(state, { type: TODOS.TOGGLE_TODO_SUCCESS, payload: { _id: '0', description: 'Learn Redux', done: true,} })).toEqual(nextState)
+  })
+
+  it('shoud return state without specified todo id, if action is DELETE_TODO', () => {
+    const nextState = {
+      todos: [
+        {
+          _id: '1',
+          description: 'Learn React',
+          done: false,
+        }
+      ]
+    }
+    expect(reducer(state, { type: TODOS.DELETE_TODO_SUCCESS, payload: { _id: '0', description: 'Learn Redux', done: true, } })).toEqual(nextState)
+  })
+})

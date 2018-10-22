@@ -1,16 +1,10 @@
 import * as React from 'react';
 import { Fragment, PureComponent } from "react";
+import { ITodoInputProps, ITodoInputState } from './TodoInput.interface';
 
-interface IState {
-  inputValue: string;
-}
 
-interface IProps {
-  addTodo: (todoText: string) => void
-}
-
-class TodoInput extends PureComponent<IProps, IState> {
-  constructor(props: IProps) {
+class TodoInput extends PureComponent<ITodoInputProps, ITodoInputState> {
+  constructor(props: ITodoInputProps) {
     super(props);
     this.state = {
       inputValue: '',

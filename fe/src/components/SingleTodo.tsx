@@ -1,13 +1,7 @@
 import * as React from "react";
 import { PureComponent } from "react";
-import { ITodo } from '../reducers/reducer';
+import { IProps } from './SingleTodo.interface';
 
-interface IProps {
-  todo: ITodo;
-  todoIndex: number;
-  toggleTodo: (id: string) => void;
-  deleteTodo: (id: string) => void;
-}
 
 class SingleTodo extends PureComponent<IProps> {
   constructor(props: IProps) {

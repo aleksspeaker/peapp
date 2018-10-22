@@ -38,11 +38,13 @@ export const reducer = (state: IState = initState, action: ITodoAction) => {
     case TODOS.TOGGLE_TODO:
       return state
     case TODOS.TOGGLE_TODO_SUCCESS:
+    // tslint:disable-next-line:no-console
+    console.log(action);
       return {
         ...state,
         todos: [
           ...state.todos.map(todo =>
-            todo._id === action.payload._id ? { ...todo, done: !todo.done } : todo),
+            todo._id === action.payload._id ? { ...todo, done: action.payload.done } : todo),
         ]
       }
     case TODOS.DELETE_TODO_START:
