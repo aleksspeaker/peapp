@@ -1,0 +1,28 @@
+version: "3"
+services:
+
+################################
+#   Setup node container
+################################
+  backend:
+    build: ./backend
+    command: yarn start
+    ports:
+      - 3001:3001
+    volumes:
+      - ./backend:/usr/src/app/
+################################
+#   Setup frontend container
+################################
+  fe:
+    build: ./fe
+    command: yarn start
+    ports:
+      - 3000:3000
+    volumes:
+      - ./fe/src:/usr/src/app/src
+      - ./fe/public:/usr/src/app/public
+    links:
+      - backend
+    depends_on:
+      - backend

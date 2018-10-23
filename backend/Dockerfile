@@ -10,6 +10,6 @@ RUN yarn
 WORKDIR /app
 ADD . /app
 
-EXPOSE 3000
+EXPOSE 3001
 
 ENTRYPOINT ["/bin/bash", "/app/run.sh"]

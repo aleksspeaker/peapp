@@ -38,7 +38,7 @@ const fetchActions = {
 
 export const fetchTodos: ActionCreator<
   ThunkAction<void, [], void, AnyAction>
-  > = () => (dispatch) => {
+  > = () => (dispatch: any) => {
     dispatch(fetchActions.fetchStart());
 
     axios
@@ -62,7 +62,7 @@ const deleteActions = {
 
 export const deleteTodo: ActionCreator<
   ThunkAction<void, [], void, AnyAction>
-  > = (id: string) => (dispatch) => {
+  > = (id: string) => (dispatch: any) => {
     dispatch(deleteActions.deleteTodoStart(id));
 
     axios
@@ -85,7 +85,7 @@ const addActions = {
 
 export const addTodo: ActionCreator<
   ThunkAction<void, [], void, AnyAction>
-  > = (todoText: string) => (dispatch) => {
+  > = (todoText: string) => (dispatch: any) => {
     const data = JSON.stringify({ description: todoText, done: false })
     dispatch(addActions.addTodoStart());
     axios
