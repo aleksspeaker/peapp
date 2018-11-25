@@ -9,10 +9,6 @@ const createAction = (type: string, payload?: any) => {
 }
 
 export enum TODOS {
-  ADD_TODO = 'ADD_TODO',
-  DELETE_TODO = 'DELETE_TODO',
-  TOGGLE_TODO = 'TOGGLE_TODO',
-
   FETCH_START = 'FETCH_START',
   FETCH_SUCCESS = 'FETCH_SUCCESS',
   FETCH_ERROR = 'FETCH_ERROR',
