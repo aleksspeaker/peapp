@@ -18,14 +18,12 @@ class TodosComponent extends PureComponent<ITodosComponentProps, ITodosComponent
   public render() {
     return(
       <>
-        <div>
-          <input
-            type="checkbox"
-            className="toggle-visibility"
-            checked={this.state.doneVisible}
-            onChange={this.handleChange}
-          />
-        </div>
+        <input
+          type="checkbox"
+          className="toggle-visibility"
+          checked={this.state.doneVisible}
+          onChange={this.handleChange}
+        />
         <div className="todo-list">
           {this.props.todos.filter(todo => {
             if(this.state.doneVisible) {
@@ -33,15 +31,16 @@ class TodosComponent extends PureComponent<ITodosComponentProps, ITodosComponent
             }
             return true;
           })
-                           .map((todo: ITodo, index) => (
-            <SingleTodo
-              key={`${todo._id}_${index}`}
-              todo={todo}
-              todoIndex={index+1}
-              toggleTodo={this.props.toggleTodo}
-              deleteTodo={this.props.deleteTodo}
-            />
-          ))}
+            .map((todo: ITodo, index) => (
+              <SingleTodo
+                key={`${todo._id}_${index}`}
+                todo={todo}
+                todoIndex={index+1}
+                toggleTodo={this.props.toggleTodo}
+                deleteTodo={this.props.deleteTodo}
+              />
+            )
+          )}
         </div>
       </>
     )
