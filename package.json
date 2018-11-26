@@ -8,6 +8,7 @@
   "author": "aleksspeaker <alekspeaker@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "run": "docker-compose up --build",
     "start": "concurrently — kill-others \"npm run backend\" \"npm run fe\"",
     "fe": "cd fe && npm run dev",
     "frontend": "cd fe && npm start",

@@ -9,7 +9,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 72px 0 0 0;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 h1 {
@@ -53,6 +53,10 @@ h1 {
   animation: fadein 0.3s 1s forwards;
 }
 
+.input-field:not([value=""]):not(:focus):invalid{
+  background-color: tomato;
+}
+
 .hint {
   margin-left: 332px;
   margin-top: -20px;
@@ -83,11 +87,14 @@ h1 {
   order: 1;
   padding: 8px 16px;
   width: 300px;
-  border: 1px solid #fff;
-  border-radius: 3px;
-  background: #fafaff;
+  border: 1px solid transparent;
+  border-bottom: 1px solid #eee;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 4px 14px -6px rgba(0,0,0,.14), 0 0px 14px -6px rgba(0,0,0,.24);
   margin: 2px 0;
   animation: appear 0.3s;
+  color: rgba(0,0,0,.87);
 }
 
 .item:hover {

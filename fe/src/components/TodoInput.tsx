@@ -47,9 +47,6 @@ class TodoInput extends PureComponent<ITodoInputProps, ITodoInputState> {
           type="text"
           placeholder="What needs to be done?"/>
         <span className="hint">&#9166;</span>
-        <button
-          onClick={this.handleSubmit}
-          type="submit" >&#9166;</button>
       </Fragment>
     )
   }
