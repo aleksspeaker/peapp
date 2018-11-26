@@ -5,3 +5,7 @@ export interface ITodosComponentProps {
   toggleTodo: (id: string) => void;
   deleteTodo: (id: string) => void;
 }
+
+export interface ITodosComponentState {
+  doneVisible: boolean;
+}

@@ -35,8 +35,6 @@ export const reducer = (state: IState = initState, action: ITodoAction) => {
           }
         ]
       }
-    case TODOS.TOGGLE_TODO:
-      return state
     case TODOS.TOGGLE_TODO_SUCCESS:
     // tslint:disable-next-line:no-console
     console.log(action);

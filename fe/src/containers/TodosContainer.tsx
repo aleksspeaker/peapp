@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Fragment, PureComponent } from 'react';
+import { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { addTodo, deleteTodo, fetchTodos, toggleTodo } from '../actions/actions';
@@ -13,14 +13,14 @@ class TodosContainer extends PureComponent<ITodosContainerProps> {
   }
   public render() {
     return (
-      <Fragment>
+      <>
         <TodoInput addTodo={this.props.addTodo}/>
         <TodosComponent
           todos={this.props.todos}
           toggleTodo={this.props.toggleTodo}
           deleteTodo={this.props.deleteTodo}
         />
-      </Fragment>
+      </>
     )
   }
 }

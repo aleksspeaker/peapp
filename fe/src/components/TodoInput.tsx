@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Fragment, PureComponent } from "react";
+import { PureComponent } from "react";
 import { ITodoInputProps, ITodoInputState } from './TodoInput.interface';
 
 
@@ -38,7 +38,7 @@ class TodoInput extends PureComponent<ITodoInputProps, ITodoInputState> {
 
   public render() {
     return (
-      <Fragment>
+      <>
         <input
           className="input-field"
           onChange={this.handleChange}
@@ -47,7 +47,7 @@ class TodoInput extends PureComponent<ITodoInputProps, ITodoInputState> {
           type="text"
           placeholder="What needs to be done?"/>
         <span className="hint">&#9166;</span>
-      </Fragment>
+      </>
     )
   }
 }
