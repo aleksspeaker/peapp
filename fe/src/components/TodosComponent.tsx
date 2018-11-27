@@ -30,10 +30,18 @@ class TodosComponent extends PureComponent<ITodosComponentProps, ITodosComponent
               return todo.done !== this.state.doneVisible
             }
             return true;
+          }).sort((a: ITodo, b: ITodo) => {
+            if( a._id > b._id) {
+              return -1;
+            }
+            if( a._id < b._id) {
+              return 1;
+            }
+            return 0;
           })
             .map((todo: ITodo, index) => (
               <SingleTodo
-                key={`${todo._id}_${index}`}
+                key={todo._id}
                 todo={todo}
                 todoIndex={index+1}
                 toggleTodo={this.props.toggleTodo}
